@@ -109,14 +109,6 @@ else:
         ],
         use_container_width=True
     )
-    csv_data = applications.to_csv(index=False).encode("utf-8")
-
-st.download_button(
-    label="Download applications as CSV",
-    data=csv_data,
-    file_name="my-internship-applications.csv",
-    mime="text/csv"
-)
 
 total_applications = len(applications)
 applied_count = (applications["status"] == "Applied").sum()
@@ -132,6 +124,13 @@ col4.metric("Rejected", rejected_count)
 
 st.subheader("Saved applications")
 csv_data = applications.to_csv(index=False).encode("utf-8")
+st.download_button(
+    label="Download applications as CSV",
+    data=csv_data,
+    file_name="my-internship-applications.csv",
+    mime="text/csv"
+)
+
 
 if applications.empty:
     st.info("No applications saved yet.")
@@ -140,6 +139,7 @@ else:
         "Filter applications by status",
         ["All", "Saved", "Applied", "Interview", "Rejected"]
     )
+
 
     if filter_status == "All":
         filtered_applications = applications
