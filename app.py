@@ -131,6 +131,8 @@ col3.metric("Interviews", interview_count)
 col4.metric("Rejected", rejected_count)
 
 st.subheader("Saved applications")
+csv_data = applications.to_csv(index=False).encode("utf-8")
+
 if applications.empty:
     st.info("No applications saved yet.")
 else:
